@@ -1,0 +1,31 @@
+
+#!//home/codespace/.python/current/bin/python
+
+import requests
+import boto3
+
+# Constants
+URL='https://media1.giphy.com/media/UQ4MTPqxcaNRyIroru/200w.gif?cid=6c09b952z16ybvtkw3h2q7zag55w2al6qczafhelbb9q3cxz&ep=v1_videos_search&rid=200w.gif&ct=v'  # GIF URL
+BUCKET_NAME='ds2022-hav7tz' 
+OBJECT_NAME='horse.gif' 
+
+def main():
+    response = requests.get(URL)
+    if response.status_code != 200:
+        print("Failed to fetch the file")
+        return
+
+    s3_client = boto3.client('s3')
+    s3_client.upload_fileobj(response.raw, BUCKET_NAME, OBJECT_NAME)
+    print(f"Uploaded {OBJECT_NAME} to {BUCKET_NAME}")
+
+
+    presigned_url = s3_client.generate_presigned_url(
+        'get_object',
+        Params={'Bucket': BUCKET_NAME, 'Key': OBJECT_NAME},
+        ExpiresIn=604800  
+    )
+    print(f"Presigned URL: {presigned_url}")
+
+if __name__ == "__main__":
+    main()

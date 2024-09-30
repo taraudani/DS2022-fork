@@ -1,0 +1,12 @@
+
+#!/bin/bash
+
+lake="https://prettylake.org/wp-content/uploads/2012/11/2012_11_15_15_53_3400012.jpg"
+
+curl $lake > lake.jpg
+
+aws s3 cp lake.jpg s3://ds2022-hav7tz/
+
+aws s3 presign --expires-in 604800 s3://ds2022-hav7tz/lake.jpg
+
+https://ds2022-hav7tz.s3.amazonaws.com/lake.jpg?AWSAccessKeyId=AKIAYWBJYXISR2SH3IX7&Signature=gqlsOAYievdhjLDR1LhnuZO%2Bx64%3D&Expires=1728337860
