@@ -29,3 +29,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# Presigned URl = https://ds2022-hav7tz.s3.amazonaws.com/horse.gif?AWSAccessKeyId=AKIAYWBJYXISR2SH3IX7&Signature=xgxxTmFG8dlD45CnQuShPIk%2FZHs%3D&Expires=1728405871
